@@ -17,7 +17,8 @@ const services = [
             { path: '/offers/getAll', method: 'get', targetPath: '/getAll' },
             { path: '/offers/create', method: 'post', targetPath: '/create' },
             { path: '/offers/update', method: 'post', targetPath: '/update' },
-            { path: '/offers/delete', method: 'post', targetPath: '/delete' }
+            { path: '/offers/delete', method: 'post', targetPath: '/delete' },
+            { path: '/offers/images/*', method: 'get', targetPath: '/images' }
         ]
     },
     {
@@ -28,7 +29,8 @@ const services = [
             { path: '/users/getAll', method: 'get', targetPath: '/getAll' },
             { path: '/users/register', method: 'post', targetPath: '/register' },
             { path: '/users/update', method: 'post', targetPath: '/update' },
-            { path: '/users/delete', method: 'post', targetPath: '/delete' }
+            { path: '/users/delete', method: 'post', targetPath: '/delete' },
+            { path: '/users/images/*', method: 'get', targetPath: '/images' }
         ]
     },
     {
@@ -40,7 +42,8 @@ const services = [
             { path: '/reviews/getAll', method: 'get', targetPath: '/getAll' },
             { path: '/reviews/create', method: 'post', targetPath: '/create' },
             { path: '/reviews/comment', method: 'post', targetPath: '/comment' },
-            { path: '/reviews/delete', method: 'post', targetPath: '/delete' }
+            { path: '/reviews/delete', method: 'post', targetPath: '/delete' },
+            { path: '/reviews/media/*', method: 'get', targetPath: '/media' }
         ]
     }
 ];
@@ -51,7 +54,11 @@ services.forEach(service => {
             case 'get':
                 app.get(route.path, (req: Request, res: Response) => {
                     const targetUrl = new URL(`${service.baseURL}${route.targetPath}`);
-                    req.url = `${service.baseURL}${route.targetPath}`;
+
+                    route.path.includes("*")
+                        ? req.url = req.originalUrl.replace(`/${service.name}`, '')
+                        : req.url = `${service.baseURL}${route.targetPath}`;
+
                     proxy.web(req, res, { target: targetUrl.origin });
                 });
                 break;
