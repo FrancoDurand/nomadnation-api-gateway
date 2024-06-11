@@ -28,6 +28,7 @@ const services = [
             { path: '/users/getById', method: 'post', targetPath: '/getById' },
             { path: '/users/getAll', method: 'get', targetPath: '/getAll' },
             { path: '/users/register', method: 'post', targetPath: '/register' },
+            { path: '/users/login', method: 'post', targetPath: '/login' },
             { path: '/users/update', method: 'post', targetPath: '/update' },
             { path: '/users/delete', method: 'post', targetPath: '/delete' },
             { path: '/users/images/*', method: 'get', targetPath: '/images' }
