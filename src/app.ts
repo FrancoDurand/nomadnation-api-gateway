@@ -11,7 +11,7 @@ const proxy = httpProxy.createProxyServer();
 const services = [
     {
         name: 'offers',
-        baseURL: 'http://localhost:3001',
+        baseURL: process.env.OFFERS_SERVICE || 'http://localhost:3001',
         routes: [
             { path: '/offers/getById', method: 'post', targetPath: '/getById' },
             { path: '/offers/getAll', method: 'get', targetPath: '/getAll' },
@@ -23,7 +23,7 @@ const services = [
     },
     {
         name: 'users',
-        baseURL: 'http://localhost:3002',
+        baseURL: process.env.USERS_SERVICE || 'http://localhost:3002',
         routes: [
             { path: '/users/getById', method: 'post', targetPath: '/getById' },
             { path: '/users/getAll', method: 'get', targetPath: '/getAll' },
@@ -36,7 +36,7 @@ const services = [
     },
     {
         name: 'reviews',
-        baseURL: 'http://localhost:3003',
+        baseURL: process.env.REVIEWS_SERVICE || 'http://localhost:3003',
         routes: [
             { path: '/reviews/getById', method: 'post', targetPath: '/getById' },
             { path: '/reviews/getByOffer', method: 'post', targetPath: '/getByOffer' },
