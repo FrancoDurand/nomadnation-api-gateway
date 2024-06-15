@@ -55,7 +55,6 @@ services.forEach(service => {
             case 'get':
                 app.get(route.path, (req: Request, res: Response) => {
                     const targetUrl = new URL(`${service.baseURL}${route.targetPath}`);
-                    console.log(service.baseURL)
                     route.path.includes("*")
                         ? req.url = req.originalUrl.replace(`/${service.name}`, '')
                         : req.url = `${service.baseURL}${route.targetPath}`;
